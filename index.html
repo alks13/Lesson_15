@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+   <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet"> 
+    <title>Lesson 15</title>
+  </head>
+  <body>
+ 
+
+
+<style type="text/css">
+
+body {
+   background: #FFF8DC;
+     font-family:'Raleway', monospace;
+    color: #8B4513
+}
+
+.box-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.box {
+  text-align: center;
+   width: 12%;
+  padding: 10px; 
+  background: #8B4513; 
+  height: 50px;
+  margin: 10px;
+  align-content: center;
+  cursor: pointer;
+  border-radius: 50px;
+  box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.25);
+-moz-box-shadow:-3px 4px 12px 0px rgba(0,0,0,0.25);
+}
+
+.note {
+
+  align-content: center;
+  padding: 5px;
+  margin: 10px;
+  opacity: 80%;
+  color: white;
+}
+
+.box_hover {
+  background-color:#CD853F;
+}
+
+.title {
+  cursor: pointer;
+}
+
+.title:hover {
+  text-decoration: underline;
+}
+
+.hidden {
+  display:none;
+}
+
+</style>
+
+            <!-- Задание 1 -->
+  <div>
+       <h3 align="left">menu of coffee:</h3>
+        <div class="box_container">
+          <div class="box" data-note="americano"></div>
+          <div class="box" data-note="americano with milk"></div>
+          <div class="box" data-note="espresso"></div>
+          <div class="box" data-note="cappucino"></div>
+          <div class="box" data-note="latte"></div>
+          <div class="box" data-note="raff"></div>
+          
+
+    </div>
+
+
+            <!-- Задание 2 -->
+
+      <h3 class="main_title">Contact:</h3>
+      
+        <div class="City">
+
+          <h4 class="title">Odessa</h4>
+          <ul class="list hidden">
+            <li>Zabolotnogo 54</li>
+            <li>Zabolotnogo 120</li>
+            <li>Bocharova 48</li>
+          </ul>
+
+
+          <h4 class="title">Kiev</h4>
+          <ul class ="list hidden">
+            <li>Saksaganskogo 5</li>
+            <li>Sofievskaya 63</li>
+            <li>Tarasa Shevchenko 25</li>
+             <li>Pushkinskaya 14</li>
+          </ul>
+
+
+           <h4 class="title">Lviv</h4>
+            <ul class ="list hidden">
+            <li>Brusnivskaya 1</li>
+            <li>Vuletskaya 2</li>
+          </ul>
+        </div>
+      </div>
+  <script>
+ 
+                        /*Задание 1*/
+
+  document.querySelector('.box_container').addEventListener( 'mouseover', (event) => {
+    let target = event.target.closest('.box');
+
+    if (!target) return;
+    if (target.classList.contains('box_hover')) return;
+
+    target.classList.add('box_hover');
+
+    let $note = document.createElement('div');
+    $note.className = 'note';
+    $note.textContent = target.dataset.note;
+    target.append($note);
+
+  })
+
+  document.querySelector('.box_container').addEventListener( 'mouseout', (event) => {
+    if (!event.relatedTarget) return;
+
+    let target = event.target.closest('.box_hover');
+
+    if (!target) return;
+
+    let relatedTarget = event.relatedTarget.closest('.box_hover');
+
+ 
+    if (target === relatedTarget) return;
+
+    target.firstChild.remove();
+    target.classList.remove('box_hover');
+
+  })
+
+
+                      /*Задание 2*/
+
+  document.querySelector('.City').addEventListener( 'click', (event) => {
+    if (!event.target.classList.contains('title')) return;
+
+    $list = event.target.nextElementSibling;
+   
+    if (!$list) return;
+
+    $list.classList.toggle('hidden');
+  })
+  </script>
+  </body>
+</html>
